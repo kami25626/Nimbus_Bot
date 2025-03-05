@@ -83,7 +83,7 @@ rps_choices = ["rock", "paper", "scissors"]
 
 # ✅ Fetch a motivational quote
 def flip_coin():
-    return "you flipped" + random.choice(coin_flip)
+    return "you flipped " + random.choice(coin_flip)
 def get_quote():
     response = requests.get('https://zenquotes.io/api/random')
     json_data = json.loads(response.text)
