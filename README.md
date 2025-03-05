@@ -1,6 +1,6 @@
 Commands:
-$inspire - Get a motivational quote\n
-$weather [city] - Get weather data\n
+$inspire - Get a motivational quote
+$weather [city] - Get weather data
 $roll - Roll a dice
 $flip - Flip a coin
 $rps - Play Rock, Paper, Scissors
