@@ -3,11 +3,10 @@ import os
 import requests
 import json
 import random
-from keep_alive import keep_alive
-
 with open('C:\\Users\\102150\\OneDrive - University of Sharjah\Desktop\\abbas games and code and igcse practice\\abbas code\\code abbas\\discord bot\\TOKEN.json') as f:
     config = json.load(f)
 TOKEN = config["token"]
+
 
 
 DATA_FILE = "data.json"  # File where bot settings are stored
@@ -96,14 +95,10 @@ def get_hadith():
     json_data_hadith = response.json()
     
     print(json_data_hadith)  # Debug: Print the whole JSON response
-
+    book = json_data_hadith["data"]["refno"]
     narrator = json_data_hadith["data"]["header"]
     hadith = json_data_hadith["data"]["hadith_english"]
-    book = json_data_hadith["data"]["refno"]
-    #taking out wrong hadith
-    if json_data_hadith["data"]["refno"] == "Sahih al-Bukhari 5133":
-        return "please try again"
-    return f"{narrator} - {hadith} - Reference: {book}"
+    return f"{narrator} - {hadith} - {book} "
 
 # ✅ Fetch the number of Ayahs for each Surah
 def get_surah_data():
@@ -244,7 +239,8 @@ async def on_message(message):
     if message.content.startswith("$quran"):
         await message.channel.send(get_ayah())
     if message.content.startswith("$help"):
-        await message.channel.send("```Commands:\n$inspire - Get a motivational quote\n$weather [city] - Get weather data\n$roll - Roll a dice\n$flip - Flip a coin\n$rps - Play Rock, Paper, Scissors\n$hadith - Get a Hadith\n$quran - Get a random Quranic verse\n$new - add a new encouragement message\n$list - list all encouragement messages\n$responding [on/off] - Toggle bot responses\n$del [index] - Delete an encouragement message```")
+        await message.channel.send("```Commands:\n$inspire - Get a motivational quote\n$weather [city] - Get weather data\n$roll - Roll a dice\n$flip - Flip a 			coin\n$rps - Play Rock, Paper, Scissors\n$hadith - Get a Hadith\n$quran - Get a random Quranic verse\n$new - add a new 											encouragement message\n$list - list all encouragement messages\n$responding [on/off] - Toggle bot responses\n$del [index] - 									Delete an encouragement message```")
+
 
 # ✅ Start Rock Paper Scissors Game
 async def start_rps(message):
@@ -294,5 +290,4 @@ async def play_rps(message, player_score, comp_score):
         await message.channel.send("You took too long! Game canceled.")
 
 # ✅ Keep bot alive & run it
-keep_alive()
 client.run(TOKEN)
