@@ -37,10 +37,45 @@ client = discord.Client(intents=intents)
 api_key = "37cfa5072401e8707c90a310b32aa458"
 
 # Word lists
-sad_words = ["sad", "depressed", "unhappy", "angry", "miserable", "depressing", "horrible"]
-starter_encouragements = ["Cheer up!", "Hang in there.", "You are a great person!", "You are amazing!", "You are good enough!", "Be Yourself!"]
-h_replies = ["thank you", "thanks", "appreciate it", "that helped", "grateful", "thx", "ty"]
-bot_replies = ["You're welcome!", "No problem!", "Glad to help!", "Anytime!", "Happy to assist!"]
+# 😞 List of sad words (Expanded)
+sad_words = [
+    "sad", "depressed", "unhappy", "angry", "miserable", "depressing", "horrible",
+    "lonely", "hopeless", "frustrated", "tired", "stressed", "down", "crying",
+    "broken", "heartbroken", "anxious", "worried", "helpless", "lost", "devastated",
+    "exhausted", "worthless", "melancholy", "gloomy", "disheartened", "blue",
+    "low", "overwhelmed", "empty", "pessimistic", "suffocating", "burnt out"
+]
+
+# 🌟 List of encouragement messages (Expanded)
+starter_encouragements = [
+    "Cheer up!", "Hang in there.", "You are a great person!", "You are amazing!",
+    "You are good enough!", "Be Yourself!", "You got this!", "Believe in yourself!",
+    "Stay strong!", "Better days are coming!", "You are not alone!", "Never give up!",
+    "Your feelings are valid.", "It's okay to feel this way.", "Keep pushing forward!",
+    "You matter!", "The sun will shine again.", "This too shall pass.", "You are loved.",
+    "Your hard work will pay off!", "Take things one step at a time.", "You're doing great!",
+    "Mistakes are just learning opportunities.", "You're stronger than you think!",
+    "The world needs you!", "You are capable of amazing things!", "Every day is a new beginning!",
+    "Stay hopeful!", "You're braver than you believe!"
+]
+
+# 😊 List of gratitude responses (Expanded)
+h_replies = [
+    "thank you", "thanks", "appreciate it", "that helped", "grateful", "thx", "ty",
+    "cheers", "much appreciated", "thanks a ton", "thank you so much", "I owe you one!",
+    "big thanks!", "thanks, that means a lot", "I'm grateful", "bless you", "respect!",
+    "you're the best!", "I really needed that", "hats off to you!", "a million thanks!"
+]
+
+# 🤖 List of bot replies (Expanded)
+bot_replies = [
+    "You're welcome!", "No problem!", "Glad to help!", "Anytime!", "Happy to assist!",
+    "That's what I'm here for!", "You're always welcome!", "Anything for you!",
+    "Hope that made your day better!", "Just doing my job!", "Stay awesome!",
+    "I'm happy to help!", "It's my pleasure!", "I'm always here if you need me!",
+    "Don't mention it!", "You're amazing too!", "No worries!", "Take care!",
+    "I got your back!", "Enjoy your day!", "Remember, you're not alone!"
+]
 
 dice_roll = ["1", "2", "3", "4", "5", "6"]
 coin_flip = ["heads", "tails"]
@@ -66,7 +101,7 @@ def get_hadith():
     hadith = json_data_hadith["data"]["hadith_english"]
     book = json_data_hadith["data"]["refno"]
     #taking out wrong hadith
-    if json_data_hadith["refno"] == "Sahih al-Bukhari 5133":
+    if json_data_hadith["data"]["refno"] == "Sahih al-Bukhari 5133":
         return "please try again"
     return f"{narrator} - {hadith} - Reference: {book}"
 
@@ -209,7 +244,7 @@ async def on_message(message):
     if message.content.startswith("$quran"):
         await message.channel.send(get_ayah())
     if message.content.startswith("$help"):
-        await message.channel.send("```Commands:\n$inspire - Get a motivational quote\n$weather [city] - Get weather data\n$roll - Roll a dice\n$flip - Flip a coin\n$rps - Play Rock, Paper, Scissors\n$hadith - Get a Hadith\n$quran - Get a random Quranic verse```")
+        await message.channel.send("```Commands:\n$inspire - Get a motivational quote\n$weather [city] - Get weather data\n$roll - Roll a dice\n$flip - Flip a coin\n$rps - Play Rock, Paper, Scissors\n$hadith - Get a Hadith\n$quran - Get a random Quranic verse\n$new - add a new encouragement message\n$list - list all encouragement messages\n$responding [on/off] - Toggle bot responses\n$del [index] - Delete an encouragement message```")
 
 # ✅ Start Rock Paper Scissors Game
 async def start_rps(message):
