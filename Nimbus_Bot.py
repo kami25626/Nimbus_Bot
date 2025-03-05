@@ -82,6 +82,8 @@ rps_choices = ["rock", "paper", "scissors"]
 
 
 # ✅ Fetch a motivational quote
+def flip_coin():
+    return "you flipped" + random.choice(coin_flip)
 def get_quote():
     response = requests.get('https://zenquotes.io/api/random')
     json_data = json.loads(response.text)
@@ -206,7 +208,8 @@ async def on_message(message):
     # ✅ Rock Paper Scissors Game
     if message.content.startswith("$rps"):
         await start_rps(message)
-
+    if message.content.startswith("$flip"):
+        await message.channel.send(flip_coin())
     # ✅ Show encouragement list
     if message.content.startswith("$list"):
         encouragement_list = "\n".join(data["encouragements"]) or "No encouragement messages found!"
